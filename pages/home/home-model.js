@@ -11,13 +11,13 @@ class Home{
   /**
    * 获取banner数据
    */
-  getBannerData(id){
+  getBannerData(id, callBack){
     wx.request({
       url: 'http://www.wxservlet.com/api/v1/banner/' + id,
       method: 'GET',
-      // 定义回调函数, 异步
+      // 定义回调函数, 异步方法
       success:function(res){
-        return res;
+        callBack(res);
       }
     })
   }

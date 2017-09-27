@@ -17,7 +17,15 @@ Page({
 
   _loadData:function(){
     var id = 1;
-    var data = home.getBannerData(id);
-  }
-  
+    // 将回调函数作为参数传入，获取异步调用结果
+    var data = home.getBannerData(id, (res)=>{
+      console.log(res);
+    });
+  },
+
+  // 回调函数的另一种方式
+  // callBack:function(res){
+  //   console.log(res);
+  // }
+
 })
