@@ -1,25 +1,26 @@
+import {Base} from '../../util/base.js'
 // home-model.js
 // 客户端的mvc
 
 /**
  * 使用ES6 class关键字定义类
  */
-class Home{
+class Home extends Base{
   constructor(){
-
+    super();
   }
   /**
    * 获取banner数据
    */
   getBannerData(id, callBack){
-    wx.request({
-      url: 'http://www.wxservlet.com/api/v1/banner/' + id,
-      method: 'GET',
-      // 定义回调函数, 异步方法
-      success:function(res){
-        callBack(res);
+    var params = {
+      url: 'banner/' + id,
+      sCallBack: function(res){
+        // 判断左侧正确，右侧才能执行
+        callBack && callBack(res.items);
       }
-    })
+    };
+    this.request(params);
   }
 }
 
