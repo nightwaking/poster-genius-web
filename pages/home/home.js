@@ -20,6 +20,10 @@ Page({
     // 将回调函数作为参数传入，获取异步调用结果
     var data = home.getBannerData(id, (res)=>{
       console.log(res);
+      // 数据绑定
+      this.setData({
+        'bannerArr': res
+      });
     });
   },
 
