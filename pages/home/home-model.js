@@ -12,12 +12,22 @@ class Home extends Base{
   /**
    * 获取banner数据
    */
-  getBannerData(id, callBack){
+  getBannerData(id, callback){
     var params = {
       url: 'banner/' + id,
-      sCallBack: function(res){
+      sCallback: function(res){
         // 判断左侧正确，右侧才能执行
-        callBack && callBack(res.items);
+        callback && callback(res.items);
+      }
+    };
+    this.request(params);
+  }
+
+  getThemeData(callback){
+    var params = {
+      url: 'theme?ids=1,2,3' ,
+      sCallback:function(data){
+        callback && callback(data);
       }
     };
     this.request(params);
