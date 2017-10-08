@@ -31,7 +31,7 @@ class Base{
         //   // 回调函数
         //   params.sCallBack(res);
         // }
-        params.sCallBack && params.sCallBack(res.data);
+        params.sCallback && params.sCallback(res.data);
       },
       fail:function(err){
 
