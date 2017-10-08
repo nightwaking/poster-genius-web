@@ -38,11 +38,25 @@ Page({
     });
   },
 
+  /**
+   * 跳转商品详情页面
+   */
   onProductsItemTap:function(event){
     var id = home.getDataSet(event, 'id');
     wx.navigateTo({
       url: '../product/product?id=' + id
-    })
+    });
+  },
+
+  /**
+   * 主题详情页面
+   */
+  onThemesItemTap: function (event) {
+    var id = home.getDataSet(event, 'id');
+    var name = home.getDataSet(event, 'name');
+    wx.navigateTo({
+      url: '../theme/theme?id=' + id + '&name' + name
+    });
   }
 
   // 回调函数的另一种方式
