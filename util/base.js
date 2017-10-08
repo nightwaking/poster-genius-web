@@ -38,6 +38,13 @@ class Base{
       }
     })
   }
+
+  /**
+   * 获取元素上绑定的值
+   */
+  getDataSet(event, key){
+    return event.currentTarget.dataset[key];
+  };
 }
 
 export {Base};

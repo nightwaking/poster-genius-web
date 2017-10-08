@@ -38,6 +38,13 @@ Page({
     });
   },
 
+  onProductsItemTap:function(event){
+    var id = home.getDataSet(event, 'id');
+    wx.navigateTo({
+      url: '../product/product?id=' + id
+    })
+  }
+
   // 回调函数的另一种方式
   // callBack:function(res){
   //   console.log(res);
