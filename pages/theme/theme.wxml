@@ -3,7 +3,7 @@
 
 <view class="container">
   <view class="theme-header">
-    <image src="{{themeInfo.head_img.url}}" mode="aspectFill"></image>
+    <image src="{{themeInfo.head_img.url}}" mode="aspectFit"></image>
   </view>
   <view class="theme-main">
     <template is="products" data="{{products:themeInfo.products}}"></template>

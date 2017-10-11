@@ -1,2 +1,28 @@
 <!--product.wxml-->
-<text>product.wxml</text>
+<view class="container detail-container">
+  
+  <view class="detail-header-box">
+    <view class="fixed-btns-box">
+      <view class="fiexd-cart">
+        <image src="../../imgs/icon/cart@top.png"></image>
+      </view>
+    </view>
+    
+    <view class="detail-topic-img">
+      <image src="{{productArr.main_img_url}}" mode="aspectFit"></image>
+    </view>
+
+    <view class="cart-box">
+      <view class="product-counts"></view>
+      <view class="middle-border"></view>
+      <view class="add-cart-btn"></view>
+    </view>
+
+    <view class="basic-info-box">
+    
+    </view>
+  </view>
+  
+  
+  <view class="classname"></view>
+</view>
