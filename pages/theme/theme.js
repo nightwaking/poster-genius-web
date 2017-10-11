@@ -22,9 +22,15 @@ Page({
     this._loadData();
   },
   
+  onReady:function (){
+    //　动态设定导航栏标题
+    wx.setNavigationBarTitle({
+      title: this.data.name
+    });
+  },
+  
   _loadData:function(){
     theme.getProductsData(this.data.id, (res)=>{
-      console.log(res);
       this.setData({
         'themeInfo': res
       });
