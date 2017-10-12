@@ -13,7 +13,15 @@
     </view>
 
     <view class="cart-box">
-      <view class="product-counts"></view>
+      <view class="product-counts">
+        <picker class="{{productArr.stock == 0 ? 'disabled' : ''}}" range="{{countsArray}}" value="" bindchange="bindPickerChange">
+          <view>
+            <text class="counts-tips">数量</text>
+            <text class="counts-data">{{productCount}}</text>
+            <image class="counts-icon" src="../../imgs/icon/arrow@down.png"></image>
+          </view>
+        </picker>
+      </view>
       <view class="middle-border"></view>
       <view class="add-cart-btn"></view>
     </view>

@@ -8,7 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id: null
+    id: null,
+    countsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    productCount: 1
   },
 
   /**
@@ -26,5 +28,16 @@ Page({
         'productArr': res
       });
     });
+  },
+
+  /**
+   * 获取用户选择的数量，通过数组的下标获取
+   */
+  bindPickerChange: function(event){
+    var index = event.detail.value;
+    var selectedCount = this.data.countsArray[index];
+    this.setData({
+      'productCount': selectedCount
+    })
   }
 })
