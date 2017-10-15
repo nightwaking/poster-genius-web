@@ -10,7 +10,9 @@ Page({
   data: {
     id: null,
     countsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    productCount: 1
+    productCount: 1,
+    tabBox: ['商品详情', '产品参数', '售后保障'],
+    currentTabsIndex:0
   },
 
   /**
@@ -38,6 +40,16 @@ Page({
     var selectedCount = this.data.countsArray[index];
     this.setData({
       'productCount': selectedCount
+    })
+  },
+
+  /**
+   * 获取选定的选项卡
+   */
+  onTabsItemTap: function(event){
+    var index = product.getDataSet(event, 'index');
+    this.setData({
+      currentTabsIndex:index
     })
   }
 })

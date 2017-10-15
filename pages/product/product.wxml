@@ -23,14 +23,48 @@
         </picker>
       </view>
       <view class="middle-border"></view>
-      <view class="add-cart-btn"></view>
+      
+      <view class="add-cart-btn {{productArr.stock == 0? 'disabled' : ''}}">
+        <text>加入购物车</text>
+        <image class="cart-icon" src="../../imgs/icon/cart.png"></image>
+      </view>
     </view>
 
     <view class="basic-info-box">
-    
+      <view class="stock" wx:if="{{productArr.stock>0}}">有货</view>
+      <view class="stock no" wx:else>缺货</view>
+      <view class="name">{{productArr.name}}</view>
+      <view class="price">￥{{productArr.price}}</view>
     </view>
   </view>
   
   
-  <view class="classname"></view>
+  <view class="detail-bottom-box">
+    <view class="tabs-box">
+      <block wx:for="{{tabBox}}">
+        <view class="tabs-item {{currentTabsIndex==index?'selected':''}}" bindtap="onTabsItemTap" data-index="{{index}}">
+          {{item}}
+        </view>
+      </block>
+    </view>
+    <view class="product-detail-box">
+      <view class="product-detail-imgs" hidden="{{currentTabsIndex!=0}}">
+        <block wx:for="{{productArr.imgs}}">
+          <image mode="aspectFill" src="{{item.img_url.url}}"></image>
+        </block>
+      </view>
+      <view hidden="{{currentTabsIndex!=1}}" class="product-detail-properties">
+        <block wx:for="{{productArr.properties}}">
+          <view class="properties-item">
+            <view class="properties-name">{{item.name}}</view>
+            <view class="properties-detail">{{item.detail}}</view>
+          </view>
+        </block>
+      </view>
+      
+      <view hidden="{{currentTabsIndex!=2}}" class="product-detail-protect">
+        <view>七天无理由退货</view>
+      </view>
+    </view>
+  </view>
 </view>
