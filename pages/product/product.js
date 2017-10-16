@@ -24,6 +24,13 @@ Page({
     this._loadData();
   },
   
+  onReady: function () {
+    //　动态设定导航栏标题
+    wx.setNavigationBarTitle({
+      title: this.data.productArr.name
+    });
+  },
+
   _loadData: function(){
     product.getDetailInfo(this.data.id, (res) => {
       this.setData({
