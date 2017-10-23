@@ -1,7 +1,10 @@
 // product.js
 import { Product } from 'product-model.js';
+import { Cart } from '../cart/cart-model.js';
 
 var product = new Product();
+var cart = new Cart();
+
 Page({
 
   /**
@@ -34,6 +37,7 @@ Page({
   _loadData: function(){
     product.getDetailInfo(this.data.id, (res) => {
       this.setData({
+        cartTotalCounts: cart.getCartTotalCounts(),
         'productArr': res
       });
     });
@@ -56,7 +60,32 @@ Page({
   onTabsItemTap: function(event){
     var index = product.getDataSet(event, 'index');
     this.setData({
-      currentTabsIndex:index
+      'currentTabsIndex':index
     })
+  },
+
+  /**
+   * 加入购物车
+   * 加入购物车动画
+   */
+  onAddingToCartTap: function(events){
+    this.addToCart();
+    this.setData({
+      'cartTotalCounts': cart.getCartTotalCounts()
+    });
+  },
+
+  /**
+   * 组装加入购物车中的数据
+   */
+  addToCart:function(){
+    var tempObj = {};
+    var keys = ['id', 'name', 'main_img_url', 'price'];
+    for (var key in this.data.productArr){
+      if (keys.indexOf(key) >= 0){
+        tempObj[key] = this.data.productArr[key];
+      }
+    }
+    cart.add(tempObj, this.data.productCount);
   }
 })

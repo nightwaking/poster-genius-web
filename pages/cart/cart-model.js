@@ -59,6 +59,20 @@ class Cart extends Base{
     }
     return result;
   }
+
+  /**
+   * 获取购物车中商品总数量
+   * @return counts 商品总数量
+   */
+  getCartTotalCounts(){
+    var data = this.getCartDataFormLocal();
+    var counts = 0;
+
+    for (let i = 0; i < data.length; i++){
+      counts += data[i].counts;
+    }
+    return counts;
+  }
 }
 
 export {Cart};
