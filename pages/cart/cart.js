@@ -1,4 +1,8 @@
 // cart.js
+import { Cart } from 'cart-model.js';
+
+var cart = new Cart();
+
 Page({
 
   /**
@@ -16,51 +20,44 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var cartData = cart.getCartDataFormLocal();
+    var countsInfo = cart.getCartTotalCounts(true);
+
+    this.setData({
+      'selectedCounts': countsInfo,
+      'cartData': cartData,
+
+    });
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
+   * 选中商品总金额
    */
-  onHide: function () {
-  
-  },
+  _calcTotalAccountAndCounts:function(data){
+    var len = data.length;
+    // 需要计算的选中商品总价格
+    var account = 0;
+    //　选中商品总数
+    var selectedCounts = 0;
+    // 选中商品种类总数
+    var selectedTypeCounts = 0;
+    // 避免浮点数运算误差
+    let multiple = 100;
+    for (let i = 0; i < len; i++){
+      if (data[i].selectedStatus){
+        account += data[i].counts * multiple * Number(data[i].price) * multiple;
+        selectedCounts += data[i].counts;
+        selectedTypeCounts ++;
+      }
+    }
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    return {
+      'selectedCounts': selectedCounts,
+      'selectTypeCounts': selectedTypeCounts,
+      'account': account / (multiple * multiple)
+    }
   }
 })

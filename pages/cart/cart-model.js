@@ -30,7 +30,7 @@ class Cart extends Base{
   /**
    * 获取缓存中的数据
    */
-  getCartDataFormLocal(){
+  getCartDataFormLocal(flag){
     var res = wx.getStorageSync(this._storageKeyName);
     if (!res){
       res = []
@@ -62,15 +62,22 @@ class Cart extends Base{
 
   /**
    * 获取购物车中商品总数量
+   * @param flag 是否考虑商品的选择状态
    * @return counts 商品总数量
    */
-  getCartTotalCounts(){
+  getCartTotalCounts(flag){
     var data = this.getCartDataFormLocal();
     var counts = 0;
 
     for (let i = 0; i < data.length; i++){
-      counts += data[i].counts;
-    }
+      if (flag){
+        if (data[i].selectStatus){
+          counts += data[i].counts;
+        }
+      }else{
+        counts += data[i].counts;
+      }
+     }
     return counts;
   }
 }
