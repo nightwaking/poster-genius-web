@@ -21,9 +21,9 @@
               </view>
               <view class="bottom-box">
                 <view class="cart-item-counts">
-                  <view class="btns">-</view>
+                  <view class="btns {{item.counts==1?'disabled':''}}" bindtap="changeCounts" data-id="{{item.id}}" data-type="cut">-</view>
                   <view class="counts">{{item.counts}}</view>
-                  <view class="btns">+</view>
+                  <view class="btns" bindtap="changeCounts" data-id="{{item.id}}" data-type="add">+</view>
                 </view>
                 <view class="delete">×</view>
               </view>
@@ -37,12 +37,13 @@
     <view class="footer-account-box all-accounts-box">
       
       <view class="all-select" ontap="toggleSelectAll" data-status="{{selectedTypeCount==cartData.length?'true':'false'}}">
-        <image wx:if="{{selectedTypeCount==cartData.length}}" class="title-icon" src="../../imgs/icon/all@selected.png"></image>
-        <image wx:else src="../../imgs/icon/all.png"></image>
-        <text>全选({{selectedCounts}})</text>
-      </view>
+                <image wx:if="{{selectedTypeCount==cartData.length}}"
+                       class="title-icon" src="../../imgs/icon/all@selected.png"></image>
+                <image wx:else class="title-icon" src="../../imgs/icon/all.png"></image>
+                <text>全选({{selectedCounts}})</text>
+            </view>
 
-      <view class="all-price-submit {{accounts==0?'disabled':''}}" bindtap="submitOrder">
+      <view class="all-price-submit {{account==0?'disabled':''}}" bindtap="submitOrder">
         <view class="accounts-btn">下单</view>
         <view class="prrice-text">￥{{account}}</view>
         <view class="arrow-icon">

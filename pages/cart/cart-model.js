@@ -80,6 +80,40 @@ class Cart extends Base{
      }
     return counts;
   }
+
+  /**
+   * 修改商品数量
+   * params
+   * id 商品id
+   * counts 数目
+   */
+  _changeCounts(id, counts){
+    var cartData = this.getCartDataFormLocal();
+    // 判断商品是否存在
+    var hasInfo = this._isHasThatOne(id, cartData);
+    if (hasInfo.index != -1){
+      if (hasInfo.data.counts > 1){
+        // 增加本件商品的数量
+        cartData[hasInfo.index].counts += counts;
+      }
+    }
+    // 更新缓存数据
+    wx.setStorageSync(this._storageKeyName, cartData);
+  }
+
+  /**
+   * 增加商品数量
+   */
+  addCounts(id){
+    this._changeCounts(id, 1);
+  }
+
+  /**
+   * 减少商品数量
+   */
+  cutCounts(id){
+    this._changeCounts(id, -1);
+  }
 }
 
 export {Cart};

@@ -29,7 +29,7 @@ Page({
     this.setData({
       'selectedCounts': cal.selectedCounts,
       'cartData': cartData,
-      'selectedTypeCount': cal.selectTypeCounts,
+      'selectedTypeCount': cal.selectTypeCount,
       'account': cal.account
     });
   },
@@ -57,7 +57,7 @@ Page({
 
     return {
       'selectedCounts': selectedCounts,
-      'selectTypeCounts': selectedTypeCounts,
+      'selectTypeCount': selectedTypeCounts,
       'account': account / (multiple * multiple)
     }
   },
@@ -74,10 +74,18 @@ Page({
   },
   
   /**
-   * 多选按钮
+   * 全选选按钮
+   * 选择商品种类和商品的商品种类相同，全部选中
    */
   toggleSelectAll:function(event){
+    var status= cart.getDataSet(event, 'status') == "true";
 
+    var data = this.data.cartData;
+    var len = data.length;
+    for (let i = 0; i < len; i++){
+      data[i].selectStatus = !status;
+    }
+    this._restCartData();
   },
 
   /**
@@ -101,9 +109,28 @@ Page({
     var newData = this._calcTotalAccountAndCounts(this.data.cartData);
     this.setData({
       'account': newData.account,
-      'selectedCounts': newData.selectedCount,
-      'selectedTypeCount': newData.selectedTypeCounts,
+      'selectedCounts': newData.selectedCounts,
+      'selectedTypeCount': newData.selectTypeCount,
       'cartData': this.data.cartData
     });
+  },
+
+  /**
+   * 商品数量改变
+   */
+  changeCounts: function(event){
+    var id = cart.getDataSet(event, 'id');
+    var countType = cart.getDataSet(event, 'type');
+    var index = this._getProductIndexById(id);
+    var counts = 1;
+
+    if (countType == 'add'){
+      cart.addCounts
+    }else{
+      counts = -1;
+      cart.cutCounts(id);
+    }
+    this.data.cartData[index].counts += counts;
+    this._restCartData();
   }
 })
