@@ -92,7 +92,7 @@ class Cart extends Base{
     // 判断商品是否存在
     var hasInfo = this._isHasThatOne(id, cartData);
     if (hasInfo.index != -1){
-      if (hasInfo.data.counts > 1){
+      if (hasInfo.data.counts >= 1){
         // 增加本件商品的数量
         cartData[hasInfo.index].counts += counts;
       }
@@ -113,6 +113,28 @@ class Cart extends Base{
    */
   cutCounts(id){
     this._changeCounts(id, -1);
+  }
+
+  /**
+   * 删除缓存中数据
+   * ids 为数组
+   */
+  delete(ids){
+    if (!(ids instanceof Array)){
+      ids = [ids];
+    }
+    var cartData = this.getCartDataFormLocal();
+    for (let i = 0; i < ids.length; i++){
+      var hasInfo = this._isHasThatOne(ids[i], cartData);
+      if (hasInfo != -1){
+        cartData.splice(hasInfo.index, 1);
+      }
+    }
+    wx.setStorageSync(this._storageKeyName, cartData);
+  }
+
+  execSetStorageSync(data){
+    wx.setStorageSync(this._storageKeyName, data);
   }
 }
 

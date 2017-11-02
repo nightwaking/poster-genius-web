@@ -6,7 +6,7 @@
         <view class="cart-item">
           <view class="cart-item-main">
             
-            <view class="cart-item-checkbox" ontap="toggleSelect" data-id="{{item.id}}" data-status="{{item.selectStatus}}">
+            <view class="cart-item-checkbox" bindtap="toggleSelect" data-id="{{item.id}}" data-status="{{item.selectStatus}}">
                     <image wx:if="{{item.selectStatus}}" src="../../imgs/icon/circle@selected.png"></image>
                     <image wx:else src="../../imgs/icon/circle@noselected.png"></image>
             </view>
@@ -25,7 +25,7 @@
                   <view class="counts">{{item.counts}}</view>
                   <view class="btns" bindtap="changeCounts" data-id="{{item.id}}" data-type="add">+</view>
                 </view>
-                <view class="delete">×</view>
+                <view class="delete" bindtap="delete" data-id="{{item.id}}">×</view>
               </view>
             </view>
 
@@ -36,7 +36,7 @@
     
     <view class="footer-account-box all-accounts-box">
       
-      <view class="all-select" ontap="toggleSelectAll" data-status="{{selectedTypeCount==cartData.length?'true':'false'}}">
+      <view class="all-select" bindtap="toggleSelectAll" data-status="{{selectedTypeCount==cartData.length?'true':'false'}}">
                 <image wx:if="{{selectedTypeCount==cartData.length}}"
                        class="title-icon" src="../../imgs/icon/all@selected.png"></image>
                 <image wx:else class="title-icon" src="../../imgs/icon/all.png"></image>

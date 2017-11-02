@@ -18,6 +18,9 @@ Page({
   onLoad: function (options) {
   
   },
+  onHide:function(){
+    cart.execSetStorageSync(this.data.cartData);
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -125,12 +128,25 @@ Page({
     var counts = 1;
 
     if (countType == 'add'){
-      cart.addCounts
+      cart.addCounts(id);
     }else{
       counts = -1;
       cart.cutCounts(id);
     }
     this.data.cartData[index].counts += counts;
     this._restCartData();
+  },
+
+  /**
+   * 删除购物车中商品
+   */
+  delete:function(event){
+    var id = cart.getDataSet(event, 'id');
+    var index = this._getProductIndexById(id);
+    
+    this.data.cartData.splice(index, 1);
+    
+    this._restCartData();
+    cart.delete(id);
   }
 })
