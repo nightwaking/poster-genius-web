@@ -35,6 +35,17 @@ class Cart extends Base{
     if (!res){
       res = []
     }
+    
+    // 过滤未选择的商品
+    if (flag){
+      var newRes = [];
+      for (let i = 0; i < res.length; i++){
+        if (res[i].selectStatus){
+          newRes.push(res[i]);
+        }
+      }
+      res = newRes;
+    }
     return res;
   }
 

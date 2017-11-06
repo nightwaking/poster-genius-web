@@ -148,5 +148,17 @@ Page({
     
     this._restCartData();
     cart.delete(id);
+  },
+
+  /**
+   * 跳转到订单详情页面
+   * 订单总金额
+   * 从哪里跳转的页面
+   */
+  submitOrder:function (event){
+    wx.navigateTo({
+      url: '../order/order?account=' + this.data.account +
+      '&from=cart',
+    });
   }
 })
