@@ -1,7 +1,11 @@
 // order.js
 import { Cart } from '../cart/cart-model.js';
+import { Address } from '../../util/address.js';
+// import { Order } from 'order-model.js';
 
 var cart = new Cart();
+var address = new Address();
+// var order = new Order();
 
 Page({
 
@@ -24,6 +28,33 @@ Page({
       'productsArr': productsArr,
       'account': options.account,
       orderStatus: 0
+    });
+  },
+
+  /**
+   * 编辑地址信息
+   */
+  editAddress: function (event){
+    var that = this;
+    wx.chooseAddress({
+      success:function(res){
+        var addressInfo ={
+          'name': res.userName,
+          'mobile': res.telNumber,
+          'totalDetail': address.setAddressInfo(res)
+        }
+
+        that._bindAddressInfo(addressInfo);
+      }
+    });
+  },
+
+  /**
+   * 绑定地址信息
+   */
+  _bindAddressInfo: function (addressInfo){
+    this.setData({
+      'addressInfo': addressInfo
     });
   }
 
