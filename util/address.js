@@ -32,6 +32,40 @@ class Address extends Base{
     return flag;  
   }
 
+  /**
+   * 更新保存地址
+   */
+  sumbitAddress(data, callback){
+    var data = this._setUpAddress(data);
+    var param = {
+      url: 'address',
+      type: 'post',
+      data: data,
+      sCallback:function (res){
+        callback && callback(true, res);
+      },
+      eCallback(res){
+        callback && callback(false, res);
+      }
+    };
+    this.request(param);
+  }
+
+  /**
+   * 保存地址
+   */
+  _setUpAddress(res){
+    var formData = {
+      name: res.userName,
+      province: res.provinceName,
+      city: res.cityName,
+      country: res.countyName,
+      mobile: res.telNumber,
+      detail: res.detailInfo
+    };
+    return formData;
+  }
+
 }
 
 export { Address } 

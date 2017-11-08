@@ -45,6 +45,12 @@ Page({
         }
 
         that._bindAddressInfo(addressInfo);
+
+        address.sumbitAddress(res, (flag) => {
+          if (!flag){
+            that.showTips('操作提示', '地址更新失败！');
+          }
+        });
       }
     });
   },
@@ -56,6 +62,24 @@ Page({
     this.setData({
       'addressInfo': addressInfo
     });
+  },
+
+  /**
+   * 提示窗口
+   */
+  showTips: function(title, content, flag){
+    wx.showModal({
+      title: title,
+      content: content,
+      showCancel: false,
+      success: function(res){
+        if (flag){
+          wx.switchTab({
+            url: '/pages/my/my',
+          });
+        }
+      }
+    })
   }
 
 })
