@@ -13,7 +13,7 @@ class Token{
     var token = wx.getStorageSync('token');
     // token不存在从服务器中获取
     if (!token){
-      this.getTokenFromSever();
+      this.getTokenFromServer();
     // 已存在验证是否有效
     }else{
       this._verifyFromServer(token);
