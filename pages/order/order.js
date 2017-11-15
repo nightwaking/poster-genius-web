@@ -29,6 +29,11 @@ Page({
       'account': options.account,
       orderStatus: 0
     });
+
+    //　显示用户地址信息
+    address.getAddress((res) => {
+      this._bindAddressInfo(res);
+    });
   },
 
   /**

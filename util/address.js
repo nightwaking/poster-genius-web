@@ -24,6 +24,24 @@ class Address extends Base{
   }
 
   /**
+   * 获取用户收货地址
+   */
+  getAddress(callback){
+    var that = this;
+    var param = {
+      url: 'address',
+      sCallback: function(res){
+        if (res){
+          // 将结果转换
+          res.totalDetail = that.setAddressInfo(res);
+          callback && callback(res);
+        }
+      }
+    };
+    this.request(param);
+  }
+
+  /**
    * 判断是否为直辖市
    */
   isCenterCity(name){
