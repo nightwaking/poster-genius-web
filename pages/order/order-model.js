@@ -72,6 +72,23 @@ class Order extends Base{
     execSetStorageSync(data){
       wx.setStorageSync(this._storageKeyName, data)
     }
+
+    /**
+     * 获取订单详情
+     */
+    getOrderInfoById(id, callback){
+      var that = this;
+      var allParams = {
+        url: 'order/' + id,
+        sCallback: function(data){
+          callback && callback(data);
+        },
+        eCallback: function(){
+
+        }
+      };
+      this.request(allParams);
+    }
 }
 
 export {Order};

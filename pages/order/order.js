@@ -13,7 +13,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id: -1
+    id: null
+  },
+
+  /**
+   * 更新商品详情
+   */
+  onShow:function(){
+    if (this.data.id){
+      var that = this;
+      // 加载数据库中的订单信息
+      var id = this.data.id;
+      order.getOrderInfoById(id, (data) => {
+        that.setData({
+          orderStatus: data.status,
+          productsArr: data.snap_items,
+          account: data.total_price,
+          basicInfo: {
+            orderTime: data.create_time,
+            orderNo: data.order_no
+          },
+        });
+
+        // 快照地址
+        var addressInfo = data.snap_address;
+        // 拼和地址信息
+        addressInfo.totalDetail = address.setAddressInfo(addressInfo);
+        that._bindAddressInfo(addressInfo);
+      });
+    }
   },
 
   /**
