@@ -17,5 +17,14 @@ Page({
       id: options.id,
       from: options.from
     })
+  },
+
+  /**
+   * 返回订单详情页面
+   */
+  viewOrder: function(event){
+    wx.navigateBack({
+      delta: 1
+    })
   }
 })
