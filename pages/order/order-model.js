@@ -89,6 +89,21 @@ class Order extends Base{
       };
       this.request(allParams);
     }
+
+    /**
+     * 获取订单列表 pageIndex从1开始 处理分页
+     */
+    getOrders(pageIndex, callback){
+      var allParams = {
+        url:'order/by_user',
+        data: {page:pageIndex},
+        type: 'get',
+        sCallback: function(data){
+          callback && callback(data);
+        }
+      };
+      this.request(allParams);
+    }
 }
 
 export {Order};
