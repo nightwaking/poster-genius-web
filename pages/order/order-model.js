@@ -104,6 +104,14 @@ class Order extends Base{
       };
       this.request(allParams);
     }
+
+    /**
+     * 是否存在新订单
+     */
+    hasNewOrder(){
+      var flag = wx.getStorageSync(this._storageKeyName);
+      return flag == true;
+    }
 }
 
 export {Order};

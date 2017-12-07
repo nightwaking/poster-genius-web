@@ -26,6 +26,26 @@ Page({
     this._getAddressInfo();
   },
 
+  onShow: function(){
+    var newOrderFlag = order.hasNewOrder();
+    if (newOrderFlag){
+      this.refresh();
+    }    
+  },
+
+  /**
+   * 订单生成后重新加载数据
+   */
+  refresh: function(){
+    var that = this;
+    this.data.orderArr = [];
+    this._getOrders(() =>{
+      that.data.isLoadedAll = false;
+      that.data.pageIndex = 1;
+      order.execSetStorageSync(false);
+    });
+  },
+
   /**
    * 获取用户信息
    */
@@ -60,7 +80,7 @@ Page({
   /**
    * 获取订单列表
    */
-  _getOrders:function(){
+  _getOrders:function(callback){
     order.getOrders(this.data.pageIndex, (res)=>{
       var data = res.data;
       if (data.length > 0){
@@ -72,7 +92,7 @@ Page({
       }else{
         this.data.isLoadAll = true;
       }
-      
+      callback && callback();
     });
   },
 
@@ -84,6 +104,59 @@ Page({
       this.data.pageIndex++;
       this._getOrders();
     }
-  }
+  },
 
+  showOrderDetailInfo: function(event){
+    var id = order.getDataSet(event, 'id');
+    wx.navigateTo({
+      url: '../order/order?from=order&id=' + id,
+    })
+  },
+
+  /**
+   * 在我的页面进行支付
+   */
+  rePay: function(event){
+    var id = order.getDataSet(event, 'id');
+    // 订单列表中的下标
+    var index = order.getDataSet(event, 'index');
+    this._execPay(id, index);
+  },
+
+  /**
+   * 执行支付
+   */
+  _execPay: function(id, index){
+    var that = this;
+    order.execPay(id, (statusCode) => {
+      if (statusCode > 0){
+        var flag = statusCode == 2;
+        // 更新订单状态
+        if (flag){
+          that.data.orderArr[index].status = 2;
+          that.setData({
+            orderArr: that.data.orderArr
+          });
+        }
+
+        // 跳转到成功页面
+        wx.navigateTo({
+          url: '../pay-result/pay-result?id=' + id + '&flag=' + flag + '&from=my',
+        });
+      }else{
+        that.showTips('支付失败', '商品库存不足');
+      }
+    })
+  },
+
+  showTips: function(title, content){
+    wx.showModal({
+      title:title,
+      content: content,
+      showCancel: false,
+      success: function(res){
+
+      }
+    })
+  }
 })
