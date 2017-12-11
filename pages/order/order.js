@@ -63,10 +63,9 @@ Page({
   _fromOrder: function(id){
     if (id) {
       var that = this;
-      console.log(id);
+      this.data.id = id;
       // 加载数据库中的订单信息
       order.getOrderInfoById(id, (data) => {
-        console.log(data.snap_items);
         that.setData({
           orderStatus: data.status,
           productsArr: data.snap_items,
@@ -166,6 +165,11 @@ Page({
         that._orderFail(data);
       }
     });
+  },
+
+  /* 再次次支付*/
+  _oneMoresTimePay: function () {
+    this._execPay(this.data.id);
   },
 
   /**

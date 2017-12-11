@@ -158,5 +158,29 @@ Page({
 
       }
     })
+  },
+
+  /**
+   * 编辑地址信息
+   */
+  editAddress: function (event) {
+    var that = this;
+    wx.chooseAddress({
+      success: function (res) {
+        var addressInfo = {
+          'name': res.userName,
+          'mobile': res.telNumber,
+          'totalDetail': address.setAddressInfo(res)
+        }
+
+        that._bindAddressInfo(addressInfo);
+
+        address.sumbitAddress(res, (flag) => {
+          if (!flag) {
+            that.showTips('操作提示', '地址更新失败！');
+          }
+        });
+      }
+    });
   }
 })
