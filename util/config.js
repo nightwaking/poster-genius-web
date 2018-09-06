@@ -2,11 +2,11 @@
 /**
  * 配置类
  */
-class Config{
-  constructor(){
+// class Config{
+//   constructor(){
 
-  }
-}
-Config.restUrl = "http://www.wxservlet.com/api/v1/";
+//   }
+// }
+// Config.restUrl = "http://www.liweilinxc.com:8280/applet-web/";
 
-export {Config};
+// export {Config};

@@ -1,39 +1,34 @@
 <!--home.wxml-->
-<import src="../tpls/products/products-tpl.wxml"/>
-<view>
+<import src="../tpls/products/products-tpl.wxml" />
 
-  <swiper indicator-dots="true" autoplay="true" class="swiper">
-    <block wx:for="{{bannerArr}}">
-      <swiper-item class="banner-item" data-id="{{item.key_word}}" bindtap="onProductsItemTap">
-        <image mode="aspectFill" class="item-image" src="{{item.img.url}}"></image>
-      </swiper-item>
-    </block>
-  </swiper>
-
-  <view class="home-main">
-    <view class="home-main-theme">
-      <view class="home-main-header">精选主题</view>
-      
-      <view class="theme-box"> 
-        <block wx:for="{{themeArr}}">
-         
-          <view wx:if="{{index==2}}" class="theme-item big" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="onThemesItemTap">
-            <image src="{{item.topic_img.url}}"></image>
-          </view>
-
-          <view wx:else class="theme-item" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="onThemesItemTap">
-            <image src="{{item.topic_img.url}}"></image>
-          </view> 
-
+<view class="home-main-products">
+  <template is="products" data="{{products:prodcutsArr}}">
+  </template>
+  <modal hidden="{{hidden}}" title="修改商品信息" confirm-text="确认" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+    <form>
+      <label>图片</label>
+      <radio-group class="img-group">
+        <block wx:for="{{imgArr}}">
+          <radio value="{{item.id}}">
+           <image src="{{item.img_url}}"></image>
+          </radio>
         </block>
-      </view>
-    </view>
-    
-    <view class="home-main-products">
-      <view class="home-main-header">最近新品</view>
-      <template is="products" data="{{products:prodcutsArr}}">
-      </template>
-    </view> 
-  </view>
-
+      </radio-group>
+      <label>名称</label>
+      <input value="{{product.name}}"></input>
+      <label>价格</label>
+      <input value="{{product.price}}"></input>
+    </form>
+  </modal>
 </view>
+
+<!-- 画布大小按需定制 这里我按照背景图的尺寸定的  -->
+<canvas canvas-id="shareImg" style="width:545px;height:771px"></canvas>
+  
+<!-- 预览区域  -->
+<view hidden='{{canvasHidden}}' class='preview'>
+  <image src='{{prurl}}' mode='widthFix'></image>
+  <button type='primary' size='mini' bindtap='save'>保存海报</button>
+</view>
+
+<button class='share' type='primary' bindtap='share'>生成海报</button>

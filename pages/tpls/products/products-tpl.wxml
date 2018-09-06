@@ -1,16 +1,27 @@
 <template name="products">
   <view class="products-box">
-    
-    <block wx:for="{{products}}">
+
+    <block wx:for="{{products}}" id="imageScreen">
       <view class="products-item" data-id="{{item.id}}" bindtap="onProductsItemTap">
+        <view class="products-item-top">
+          <text class="name">{{item.name}}</text>
+        </view>
         <image src="{{item.main_img_url}}" class="products-image">
         </image>
         <view class="products-item-bottom">
-          <text class="name">{{item.name}}</text>
-          <view class="price">{{item.price}}</view>
+          <view class="price">￥{{item.price}}元</view>
         </view>
       </view>
     </block>
-
+    <view class="scan-item" bindtap="scanViewTap">
+      <view class="scan-image">
+        <text class="scan-add">
+          +
+        </text>
+      </view>
+      <view class="scan-item-bottom">
+        <text class="name">扫码</text>
+      </view>
+    </view>
   </view>
 </template>

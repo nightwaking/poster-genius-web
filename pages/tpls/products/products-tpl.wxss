@@ -20,14 +20,59 @@
   border-radius: 10rpx;
 }
 
+.products-item-top{
+  text-align: center;
+  color: #333;
+}
+.products-item-top .name{
+  font-size: 28rpx;
+}
+
 .products-item-bottom{
+  position: relative;
+  margin-top: -55rpx; 
+  text-align: center;
+  color: #333;
+  width:90%;
+}
+
+.products-item-bottom .price{
+  float: right;
+  font-size: 45rpx;
+  background-color: red;
+  border-radius: 15rpx;
+  line-height: 50rpx;
+  width: 160rpx;
+  color: #fff;
+  height: 50rpx;
+}
+
+.scan-item{
+  min-height:300rpx;
+  width: 49%;
+  border-radius: 10rpx;
+  border: dashed;
+  margin-bottom: 10rpx;
+  background-color: #F5F6F5;
+  text-align: center;
+  color: rgb(207, 197, 197);
+}
+
+.scan-add{
+  font-size: 65rpx;
+  flex-direction: column;
+  align-items: center;  
+}
+
+.scan-image{
+  margin: 10rpx auto 0 auto;
+  width: 75%;
+  height:220rpx;
+  border-radius: 10rpx;
+}
+
+.scan-item-bottom{
   text-align: center;
   margin-bottom:20rpx;
   color: #333;
-}
-.products-item-bottom .name{
-  font-size: 28rpx;
-}
-.products-item-bottom .price{
-  font-size: 24rpx;
 }

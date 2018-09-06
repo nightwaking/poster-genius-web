@@ -5,7 +5,7 @@ import {Token} from 'token.js';
  */
 class Base{
   constructor(){
-    this.baseRequestUrl = Config.restUrl;
+    this.baseRequestUrl = 'http://www.liweilinxc.com:8280/applet-web/';
   }
 
   /**

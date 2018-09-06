@@ -2,8 +2,8 @@ import { Config } from 'config.js';
 
 class Token{
   constructor(){
-    this.tokenUrl = Config.restUrl + 'token/user';
-    this.verifyUrl = Config.restUrl + 'token/verify'
+    this.tokenUrl = 'http://www.liweilinxc.com:8280/applet-web/' + 'login';
+    this.verifyUrl = 'http://www.liweilinxc.com:8280/applet-web/' + 'login/verify'
   }
 
   /**
